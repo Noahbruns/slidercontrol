@@ -1,9 +1,5 @@
-export interface LightState {
-  led_on: boolean;
-}
-
-export interface LightMqttSettings { 
-  unique_id : string;
-  name: string;
-  mqtt_path : string;
+export interface SliderState {
+  range_min: number,
+  range_max: number,
+  speed: number,
 }

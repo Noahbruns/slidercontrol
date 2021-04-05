@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router-dom'
 
 import { MenuAppBar } from '../components';
 
-import LightStateWebSocketController from './LightStateWebSocketController';
+import SliderStateWebSocketController from './SliderStateWebSocketController';
 
 class Project extends Component<RouteComponentProps> {
 
@@ -14,7 +14,7 @@ class Project extends Component<RouteComponentProps> {
   render() {
     return (
       <MenuAppBar sectionTitle="Slider">
-        <LightStateWebSocketController />
+        <SliderStateWebSocketController />
       </MenuAppBar>
     )
   }

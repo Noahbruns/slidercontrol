@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 
 import { Box, Switch, Grid, Button, FormControlLabel } from '@material-ui/core';
@@ -7,14 +7,14 @@ import { WEB_SOCKET_ROOT } from '../api';
 import { WebSocketControllerProps, WebSocketFormLoader, WebSocketFormProps, webSocketController } from '../components';
 import { SectionContent, } from '../components';
 
-import { LightState } from './types';
+import { SliderState } from './types';
 import { ChevronLeft, ChevronRight } from '@material-ui/icons';
 
-export const LIGHT_SETTINGS_WEBSOCKET_URL = WEB_SOCKET_ROOT + "lightState";
+export const LIGHT_SETTINGS_WEBSOCKET_URL = WEB_SOCKET_ROOT + "SliderState";
 
-type LightStateWebSocketControllerProps = WebSocketControllerProps<LightState>;
+type SliderStateWebSocketControllerProps = WebSocketControllerProps<SliderState>;
 
-class LightStateWebSocketController extends Component<LightStateWebSocketControllerProps> {
+class SliderStateWebSocketController extends Component<SliderStateWebSocketControllerProps> {
 
   render() {
     return (
@@ -22,7 +22,7 @@ class LightStateWebSocketController extends Component<LightStateWebSocketControl
         <WebSocketFormLoader
           {...this.props}
           render={props => (
-            <LightStateWebSocketControllerForm {...props} />
+            <SliderStateWebSocketControllerForm {...props} />
           )}
         />
       </SectionContent>
@@ -31,33 +31,30 @@ class LightStateWebSocketController extends Component<LightStateWebSocketControl
 
 }
 
-export default webSocketController(LIGHT_SETTINGS_WEBSOCKET_URL, 100, LightStateWebSocketController);
+export default webSocketController(LIGHT_SETTINGS_WEBSOCKET_URL, 100, SliderStateWebSocketController);
 
-type LightStateWebSocketControllerFormProps = WebSocketFormProps<LightState>;
+type SliderStateWebSocketControllerFormProps = WebSocketFormProps<SliderState>;
 
-function LightStateWebSocketControllerForm(props: LightStateWebSocketControllerFormProps) {
+function SliderStateWebSocketControllerForm(props: SliderStateWebSocketControllerFormProps) {
   const { data, saveData, setData } = props;
 
-  const [SliderRange, setSliderRange] = useState<number | number[]>([0,2100]);
-  const [SliderSpeed, setSliderSpeed] = useState<number | number[]>([20]);
-
-  const changeLedOn = (event: React.ChangeEvent<HTMLInputElement>) => {
+  /*const changeLedOn = (event: React.ChangeEvent<HTMLInputElement>) => {
     setData({ led_on: event.target.checked }, saveData);
+  }*/
+
+  const onSliderRange = (event: any, value: unknown)  => {
+    setData({ ...data, range_min: (value as number[])[0], range_max: (value as number[])[1] }, saveData);
   }
 
-  const onSliderRange = (event: any, value: number | number[])  => {
-    setSliderRange(value)
-  }
-
-  const onSliderSpeed = (event: any, value: number | number[])  => {
-    setSliderSpeed(value)
+  const onSliderSpeed = (event: any, value: unknown)  => {
+    setData({ ...data, speed: value as number }, saveData);
   }
 
   return (<>
       <ValidatorForm onSubmit={saveData}>
         <Box mt={8} mx={4}>
           <Slider
-            value={SliderRange}
+            value={[data.range_min, data.range_max]}
             onChange={onSliderRange}
             valueLabelDisplay="on"
             min={0}
@@ -75,7 +72,7 @@ function LightStateWebSocketControllerForm(props: LightStateWebSocketControllerF
 
         <Box mt={8} mx={4}>
           <Slider
-            value={SliderSpeed}
+            value={data.speed}
             onChange={onSliderSpeed}
             valueLabelDisplay="on"
             min={0}
