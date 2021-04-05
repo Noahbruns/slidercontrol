@@ -23,20 +23,27 @@ class SliderState {
   }
 
   static int updatesingle(StateUpdateResult &update, int current, const char* name, int def, JsonObject& root) {
-    boolean newState = root[name] | def;
+    long newState = root[name] | def;
     if (current != newState) {
       update = StateUpdateResult::CHANGED;
+      return newState;
     }
 
-    return newState;
+    return current;
   }
 
   static StateUpdateResult update(JsonObject& root, SliderState& SliderState) {
     StateUpdateResult update = StateUpdateResult::UNCHANGED;
 
     SliderState.range_min = updatesingle(update, SliderState.range_min, "range_min", 0, root);
-    SliderState.range_max = updatesingle(update, SliderState.range_max, "range_max", 0, root);
-    SliderState.speed = updatesingle(update, SliderState.speed, "speed", 0, root);
+    SliderState.range_max = updatesingle(update, SliderState.range_max, "range_max", 2100, root);
+    SliderState.speed = updatesingle(update, SliderState.speed, "speed", 50, root);
+
+    Serial.println("State now at");
+    serializeJson(root, Serial);
+    Serial.println(SliderState.range_max); 
+    Serial.println(SliderState.range_min); 
+    Serial.println(SliderState.speed); 
 
     return update;
   }
