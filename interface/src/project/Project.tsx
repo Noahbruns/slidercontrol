@@ -5,7 +5,7 @@ import { MenuAppBar } from '../components';
 
 import LightStateWebSocketController from './LightStateWebSocketController';
 
-class DemoProject extends Component<RouteComponentProps> {
+class Project extends Component<RouteComponentProps> {
 
   handleTabChange = (event: React.ChangeEvent<{}>, path: string) => {
     this.props.history.push(path);
@@ -21,4 +21,4 @@ class DemoProject extends Component<RouteComponentProps> {
 
 }
 
-export default DemoProject;
+export default Project;
