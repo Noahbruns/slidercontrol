@@ -19,13 +19,12 @@ typedef enum : int {
 
 class SliderState {
  public:
-  int range_min;
-  int range_max;
-  int position;
-  int speed;
-  SliderMode_t mode;
-  bool bounce;
-
+  int range_min = 0;
+  int range_max = 2100;
+  int position= 0;
+  int speed = 0;
+  SliderMode_t mode = HOME;
+  bool bounce = true;
 
   static void read(SliderState& settings, JsonObject& root) {
     root["range_min"] = settings.range_min;
@@ -64,11 +63,6 @@ class SliderState {
     SliderState.speed = updatesingleInt(update, SliderState.speed, "speed", 50, root);
     SliderState.mode = (SliderMode_t) updatesingleInt(update, SliderState.mode, "mode", 0, root);
     SliderState.bounce = updatesingleBool(update, SliderState.bounce, "bounce", false, root);
-
-    //Serial.println("State now at");
-    //Serial.println(SliderState.range_max); 
-    //Serial.println(SliderState.range_min); 
-    //Serial.println(SliderState.speed); 
 
     return update;
   }

@@ -15,7 +15,7 @@ SliderStateService::SliderStateService(AsyncWebServer* server,
                server,
                LIGHT_SETTINGS_SOCKET_PATH,
                securityManager,
-               AuthenticationPredicates::IS_AUTHENTICATED) 
+               AuthenticationPredicates::IS_AUTHENTICATED)
 {
   
 }
