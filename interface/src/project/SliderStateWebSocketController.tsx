@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 
-import { Box, Switch, Grid, Button, FormControlLabel, Slider } from '@material-ui/core';
+import { Box, Switch, Grid, Button, FormControlLabel } from '@material-ui/core';
 import MainSlider from './Slider'
 import { WEB_SOCKET_ROOT } from '../api';
 import { WebSocketControllerProps, WebSocketFormLoader, WebSocketFormProps, webSocketController } from '../components';
@@ -69,6 +69,24 @@ function SliderStateWebSocketControllerForm(props: SliderStateWebSocketControlle
   }
 
   return (<>
+      <Box mt={8} mx={4} mb={4}>
+        <MainSlider
+          value={data.position}
+          valueLabelDisplay="on"
+          min={0}
+          max={2100}
+          step={1}
+          track={false}
+          marks={[{
+            value: 2100,
+            label: '2100mm'
+          },{
+            value: 0,
+            label: '0mm'
+          }]}
+        />
+      </Box>
+
       <ValidatorForm onSubmit={saveData}>
         <Box mt={5} mx={4} flexWrap="nowrap" display="flex" alignItems="center">
             <Button variant="contained"

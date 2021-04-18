@@ -38,10 +38,9 @@ const MainSlider = withStyles({
         width: 1,
         marginTop: -3,
     },
-    markActive: {
-        opacity: 1,
-        backgroundColor: 'currentColor',
-    },
+    markLabel: {
+        marginTop: 12,
+    }
 })(Slider);
 
 export default MainSlider;
