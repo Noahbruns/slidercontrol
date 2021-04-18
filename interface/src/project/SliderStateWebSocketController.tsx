@@ -20,7 +20,7 @@ class SliderStateWebSocketController extends Component<SliderStateWebSocketContr
 
   render() {
     return (
-      <SectionContent title='Slider Controller' titleGutter>
+      <SectionContent title='Slider Control' titleGutter>
         <WebSocketFormLoader
           {...this.props}
           render={props => (
@@ -141,17 +141,8 @@ function SliderStateWebSocketControllerForm(props: SliderStateWebSocketControlle
         </Box>
 
 
-        <Grid container spacing={10}>
-          <Grid item xs={4}>
-            <Button variant="contained" 
-            style={{padding: '20px 0', width: '100%'}}
-            color={data.mode === SliderMode_t.HOME ? "primary" : "default"}
-            onClick={onHome}
-            >
-              HOME
-            </Button>
-          </Grid>
-          <Grid item xs={4}>
+        <Grid container spacing={5}>
+          <Grid item xs={12} md={4}>
             <Button variant="contained"
             style={{padding: '20px 0', width: '100%'}}
             color={data.mode === SliderMode_t.STOP ? "primary" : "secondary"}
@@ -160,18 +151,29 @@ function SliderStateWebSocketControllerForm(props: SliderStateWebSocketControlle
               STOP
             </Button>
           </Grid>
-          <Grid item xs={4}>
-            <FormControlLabel
-              control={
-                <Switch
-                  name="checkedB"
-                  color='primary'
-                  checked={data.bounce}
-                  onChange={onBounce}
-                />
-              }
-              label="Bounce"
-            />
+          <Grid item xs={12} md={4}>
+            <Button variant="contained" 
+            style={{padding: '20px 0', width: '100%'}}
+            color={data.mode === SliderMode_t.HOME ? "primary" : "default"}
+            onClick={onHome}
+            >
+              HOME
+            </Button>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Box display='flex' alignItems='center' justifyContent='center' height='100%'>
+              <FormControlLabel
+                control={
+                  <Switch
+                    name="checkedB"
+                    color='primary'
+                    checked={data.bounce}
+                    onChange={onBounce}
+                  />
+                }
+                label="Bounce"
+              />
+            </Box>
           </Grid>
         </Grid>
       </ValidatorForm>
