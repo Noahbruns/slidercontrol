@@ -34,10 +34,12 @@ commandscallback commands[1] = {{"G28",homing}};
 gcode Commands(1,commands);
 
 void setup() {
-  //SPI.begin();
+  SPI.begin();
   Commands.begin();
 
-  Serial.println("Start...");
+  delay(1000);
+
+  /*Serial.println("Start...");
   pinMode(CS_PIN, OUTPUT);
   digitalWrite(CS_PIN, HIGH);
   driver.begin();             // Initiate pins and registeries
@@ -74,7 +76,7 @@ void setup() {
   stepper.setCurrentPosition(0);
   stepper.setAcceleration(acceleration * steps_per_mm);
 
-  Serial.println("Done!");
+  Serial.println("Done!");*/
 }
 
 
@@ -87,7 +89,7 @@ void loop() {
   if(Commands.available())
   { 
     if(Commands.availableValue('X')) {
-      stepper.moveTo(Commands.GetValue('F'));
+      stepper.moveTo(Commands.GetValue('X'));
     }
     if(Commands.availableValue('F')) {
       stepper.setAcceleration(Commands.GetValue('F') * steps_per_mm);
